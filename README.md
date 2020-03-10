@@ -1,5 +1,7 @@
 # Speech (Audio) to Text sample using Azure Function
 
+[![Build Status](https://dev.azure.com/danshue/SpeechToText/_apis/build/status/danielshue.SpeechToText?branchName=master)](https://dev.azure.com/danshue/SpeechToText/_build/latest?definitionId=152&branchName=master)
+
 This code sample provides an example of how one might convert an audio file to text and then provide a transcript, key phrases, and overall sentiment analytics of the content. This example has been tested on audio files up to 5 minutes. It may work longer on longer audio, but need to be aware that Azure Functions may timeout.
 
 In order for this service to work, the following services need to be created in Azure.
