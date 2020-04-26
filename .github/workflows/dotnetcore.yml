@@ -1,6 +1,6 @@
 name: .NET Core
 env:
-  solution: './src/Azure.Cognitive.Services.Speech.Samples/Azure.Cognitive.Services.Speech.Samples.sln'
+  solution: 'Azure.Cognitive.Services.Speech.Samples.sln'
 on:
   push:
     branches: [ master ]
@@ -8,22 +8,20 @@ on:
     branches: [ master ]
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}    
     strategy:
       matrix:
         os: [macOS-latest, ubuntu-latest, windows-latest]
-    steps:        
-    
-    - uses: actions/checkout@v2
-        
-    - name: Setup .NET Core
+    steps:            
+    - uses: actions/checkout@v2        
+    - name: Setup .NET Core for ${{ matrix.os }}
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.101    
       if: matrix.os == 'macOS-latest' || matrix.os == 'ubuntu-latest'
-
-    - name: Build
+    - name: Build on ${{ matrix.os }}
+      working-directory: './src/Azure.Cognitive.Services.Speech.Samples/'
       run: dotnet build $solution --configuration Release    
-
-    - name: Test
+    - name: Test on ${{ matrix.os }}
+      working-directory: './src/Azure.Cognitive.Services.Speech.Samples/'
       run: dotnet test $solution --configuration Release --no-restore --verbosity normal
