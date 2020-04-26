@@ -17,8 +17,8 @@ jobs:
       with:
         dotnet-version: 3.1.101    
     - name: Install dependencies
-      run: dotnet restore *.csproj    
+      run: dotnet restore ./src/Azure.Cognitive.Services.Speech.Samples/Azure.Cognitive.Services.Speech.Samples.sln    
     - name: Build
-      run: dotnet build  *.csproj --configuration Release --no-restore    
+      run: dotnet build ./src/Azure.Cognitive.Services.Speech.Samples/Azure.Cognitive.Services.Speech.Samples.sln --configuration Release --no-restore    
     - name: Test
-      run: dotnet test  *.csproj --no-restore --verbosity normal
+      run: dotnet test ./src/Azure.Cognitive.Services.Speech.Samples/Azure.Cognitive.Services.Speech.Samples.sln --no-restore --verbosity normal
