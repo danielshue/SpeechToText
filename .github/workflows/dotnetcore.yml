@@ -25,11 +25,6 @@ jobs:
     - name: Test on ${{ matrix.os }}
       working-directory: './src/Azure.Cognitive.Services.Speech.Samples/'
       run: dotnet test $solution --configuration Release --no-restore --verbosity normal
-    - name: Zip files on ${{ matrix.os }}
-      uses: montudor/action-zip@v0.1.0
-      with:
-        working-directory: './src/Azure.Cognitive.Services.Speech.Samples/'
-        arg: zip -qq -r dist-${{ matrix.os }}.zip ./publish_output
     - name: Archive files on ${{ matrix.os }}
       uses: actions/upload-artifact@v1
       with: 
