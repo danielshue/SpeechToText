@@ -8,16 +8,17 @@ on:
     branches: [ master ]
 jobs:
   build:
-    runs-on: ubuntu-latest  
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macOS-latest, ubuntu-latest, windows-latest]
     steps:        
     - uses: actions/checkout@v2
     - name: Setup .NET Core in working directory - $working-directory
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.101    
-#    - name: Install dependencies
-#      run: dotnet restore
     - name: Build
       run: dotnet build $solution --configuration Release    
     - name: Test
-      run: dotnet test $solution n --no-restore --verbosity normal
+      run: dotnet test $solution --no-restore --verbosity normal
