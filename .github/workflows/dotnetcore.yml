@@ -15,13 +15,12 @@ jobs:
     steps:        
     
     - uses: actions/checkout@v2
-      
-      if: matrix.os == 'macOS-latest' || matrix.os == 'ubuntu-latest'
-    
+        
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.101    
+      if: matrix.os == 'macOS-latest' || matrix.os == 'ubuntu-latest'
 
     - name: Build
       run: dotnet build $solution --configuration Release    
