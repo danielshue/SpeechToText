@@ -4,9 +4,6 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-defaults:
-  run:
-    working-directory: '$HOME/src/Azure.Cognitive.Services.Speech.Samples/SpeechtoText'    
 jobs:
   build:
     runs-on: ubuntu-latest  
@@ -16,9 +13,9 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.101    
-    - name: Install dependencies
-      run: dotnet restore ./src/Azure.Cognitive.Services.Speech.Samples/Azure.Cognitive.Services.Speech.Samples.sln    
+    - name: Install dependencies in working directory - $working-directory
+#      run: dotnet restore
     - name: Build
-      run: dotnet build ./src/Azure.Cognitive.Services.Speech.Samples/Azure.Cognitive.Services.Speech.Samples.sln --configuration Release --no-restore    
+      run: dotnet build $HOME/src/Azure.Cognitive.Services.Speech.Samples/Azure.Cognitive.Services.Speech.Samples.sln --configuration Release --no-restore    
     - name: Test
-      run: dotnet test ./src/Azure.Cognitive.Services.Speech.Samples/Azure.Cognitive.Services.Speech.Samples.sln --no-restore --verbosity normal
+      run: dotnet test $HOME/src/Azure.Cognitive.Services.Speech.Samples/Azure.Cognitive.Services.Speech.Samples.sln --no-restore --verbosity normal
