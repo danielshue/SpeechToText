@@ -1,4 +1,6 @@
 name: .NET Core
+env:
+  solution: './src/Azure.Cognitive.Services.Speech.Samples/Azure.Cognitive.Services.Speech.Samples.sln'
 on:
   push:
     branches: [ master ]
@@ -16,6 +18,6 @@ jobs:
 #    - name: Install dependencies
 #      run: dotnet restore
     - name: Build
-      run: dotnet build ./src/Azure.Cognitive.Services.Speech.Samples/Azure.Cognitive.Services.Speech.Samples.sln --configuration Release    
+      run: dotnet build $solution --configuration Release    
     - name: Test
-      run: dotnet test ./src/Azure.Cognitive.Services.Speech.Samples/Azure.Cognitive.Services.Speech.Samples.sln --no-restore --verbosity normal
+      run: dotnet test $solution n --no-restore --verbosity normal
