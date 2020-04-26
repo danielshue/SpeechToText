@@ -18,4 +18,4 @@ jobs:
     - name: Build
       run: dotnet build ./src/Azure.Cognitive.Services.Speech.Samples/Azure.Cognitive.Services.Speech.Samples.sln --configuration Release    
     - name: Test
-      run: dotnet test $HOME/src/Azure.Cognitive.Services.Speech.Samples/Azure.Cognitive.Services.Speech.Samples.sln --no-restore --verbosity normal
+      run: dotnet test ./src/Azure.Cognitive.Services.Speech.Samples/Azure.Cognitive.Services.Speech.Samples.sln --no-restore --verbosity normal
