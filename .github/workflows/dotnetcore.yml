@@ -9,11 +9,11 @@ jobs:
     runs-on: ubuntu-latest  
     steps:        
     - uses: actions/checkout@v2
-    - name: Setup .NET Core
+    - name: Setup .NET Core in working directory - $working-directory
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.101    
-    - name: Install dependencies in working directory - $working-directory
+#    - name: Install dependencies
 #      run: dotnet restore
     - name: Build
       run: dotnet build $HOME/src/Azure.Cognitive.Services.Speech.Samples/Azure.Cognitive.Services.Speech.Samples.sln --configuration Release --no-restore    
