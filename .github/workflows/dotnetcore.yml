@@ -16,6 +16,6 @@ jobs:
 #    - name: Install dependencies
 #      run: dotnet restore
     - name: Build
-      run: dotnet build $HOME/src/Azure.Cognitive.Services.Speech.Samples/Azure.Cognitive.Services.Speech.Samples.sln --configuration Release --no-restore    
+      run: dotnet build ./src/Azure.Cognitive.Services.Speech.Samples/Azure.Cognitive.Services.Speech.Samples.sln --configuration Release    
     - name: Test
       run: dotnet test $HOME/src/Azure.Cognitive.Services.Speech.Samples/Azure.Cognitive.Services.Speech.Samples.sln --no-restore --verbosity normal
