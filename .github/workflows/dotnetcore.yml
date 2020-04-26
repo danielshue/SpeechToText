@@ -9,7 +9,7 @@ on:
 
 defaults:
   run:
-    working-directory: '$(System.DefaultWorkingDirectory)/src/Azure.Cognitive.Services.Speech.Samples/SpeechtoText'
+    working-directory: '$HOME/src/Azure.Cognitive.Services.Speech.Samples/SpeechtoText'
     
 jobs:
 
