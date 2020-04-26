@@ -1,6 +1,9 @@
 name: .NET Core
 env:
   solution: 'Azure.Cognitive.Services.Speech.Samples.sln'
+  AZURE_FUNCTIONAPP_NAME: SpeechToText  # set this to your application's name
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: './src/Azure.Cognitive.Services.Speech.Samples/publish_output'    # set this to the path to your web app project, defaults to the repository root
+  DOTNET_VERSION: '3.0.3'              # set this to the dotnet version to use
 on:
   push:
     branches: [ master ]
@@ -25,9 +28,23 @@ jobs:
     - name: Test on ${{ matrix.os }}
       working-directory: './src/Azure.Cognitive.Services.Speech.Samples/'
       run: dotnet test $solution --configuration Release --no-restore --verbosity normal
+
     - name: Archive files on ${{ matrix.os }}
       uses: actions/upload-artifact@v1
       with: 
         name: dist-${{ matrix.os }}
         path: './src/Azure.Cognitive.Services.Speech.Samples/publish_output'
-    
+
+      if: matrix.os == 'windows-latest'
+    - name: Login via Azure CLI
+      uses: azure/login@v1
+      with:
+       creds: ${{ secrets.AZURE_CREDENTIALS }}
+      
+      if: matrix.os == 'windows-latest'     
+    - name: 'Run Azure Functions Action'
+      uses: Azure/functions-action@v1
+      id: fa
+      with:
+        app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
+        package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
