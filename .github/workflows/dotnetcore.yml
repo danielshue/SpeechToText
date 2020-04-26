@@ -28,7 +28,5 @@ jobs:
     - name: Archive files on ${{ matrix.os }}
       uses: actions/upload-artifact@v1
       with: 
-        name: dist
+        name: dist-${{ matrix.os }}
         path: './src/Azure.Cognitive.Services.Speech.Samples/publish_output'
-    - name: Directory
-      run: ls -l './src/Azure.Cognitive.Services.Speech.Samples'
