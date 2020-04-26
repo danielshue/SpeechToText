@@ -22,8 +22,6 @@ jobs:
     - name: Build on ${{ matrix.os }}
       working-directory: './src/Azure.Cognitive.Services.Speech.Samples/'
       run: dotnet build $solution --output ./publish_output --configuration Release  
-    - name: Directory
-      run: ls -l './src/Azure.Cognitive.Services.Speech.Samples/publish_output'
     - name: Test on ${{ matrix.os }}
       working-directory: './src/Azure.Cognitive.Services.Speech.Samples/'
       run: dotnet test $solution --configuration Release --no-restore --verbosity normal
@@ -32,3 +30,5 @@ jobs:
       with: 
         name: dist
         path: './src/Azure.Cognitive.Services.Speech.Samples/publish_output'
+    - name: Directory
+      run: ls -l './src/Azure.Cognitive.Services.Speech.Samples'
