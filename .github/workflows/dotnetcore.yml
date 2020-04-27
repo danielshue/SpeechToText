@@ -17,13 +17,7 @@ jobs:
     strategy:
       matrix:
         os: [macOS-latest, ubuntu-latest, windows-latest]
-    steps:
-    - name: Login via Azure CLI
-      uses: azure/login@v1
-      with:
-       creds: ${{ secrets.SCM_CREDENTIALS }}
-      if: matrix.os == 'windows-latest'
-                      
+    steps:                      
     - uses: actions/checkout@v2
                   
     - name: If Unix, Setup .NET Core for ${{ matrix.os }}
@@ -52,4 +46,5 @@ jobs:
       with:
         app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
         package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
+        publish-profile: ${{ secrets.SCM_CREDENTIALS }}
       if: matrix.os == 'windows-latest'
