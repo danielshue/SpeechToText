@@ -18,28 +18,34 @@ jobs:
       matrix:
         os: [macOS-latest, ubuntu-latest, windows-latest]
     steps:            
+    - uses: actions/checkout@v2
+              
     - name: Login via Azure CLI
       uses: azure/login@v1
       with:
        creds: ${{ secrets.AZURE_CREDENTIALS }}
       if: matrix.os == 'windows-latest'
-    - uses: actions/checkout@v2        
+    
     - name: If Unix, Setup .NET Core for ${{ matrix.os }}
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.101    
       if: matrix.os == 'macOS-latest' || matrix.os == 'ubuntu-latest'
+
     - name: Build on ${{ matrix.os }}
       working-directory: './src/Azure.Cognitive.Services.Speech.Samples/'
       run: dotnet build $solution --output ./publish_output --configuration Release  
+
     - name: Test on ${{ matrix.os }}
       working-directory: './src/Azure.Cognitive.Services.Speech.Samples/'
       run: dotnet test $solution --configuration Release --no-restore --verbosity normal
+    
     - name: Archive files on ${{ matrix.os }}
       uses: actions/upload-artifact@v1
       with: 
         name: dist-${{ matrix.os }}
         path: './src/Azure.Cognitive.Services.Speech.Samples/publish_output'
+    
     - name: 'Run Azure Functions Action'
       uses: Azure/functions-action@v1
       id: fa
